@@ -13,7 +13,7 @@ public class LinkListDeque<T> {
     }
 
     private LLD sentinel;
-    private int size = 0;
+    private int size;
 
     /** Create an empty linked list deque */
     public LinkListDeque() {
@@ -21,6 +21,7 @@ public class LinkListDeque<T> {
         sentinel = new LLD(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
+        size = 0;
     }
 
     /** Adds an item of type T to the front of the deque */
@@ -60,6 +61,7 @@ public class LinkListDeque<T> {
         T t = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
+        size -= 1;
         return t;
     }
 
@@ -73,6 +75,7 @@ public class LinkListDeque<T> {
         T t = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
+        size -= 1;
         return t;
     }
 
@@ -99,6 +102,9 @@ public class LinkListDeque<T> {
 
     /** Print deque from first to last, separated by a space */
     public void printDeque() {
+        if (size == 0) {
+            System.out.println("Empty list!");
+        }
         LLD l = sentinel.next;
         while (l != sentinel) {
             System.out.print(l.item + " ");
@@ -109,19 +115,5 @@ public class LinkListDeque<T> {
 
     public int size() {
         return size;
-    }
-
-    public static void main(String[] args) {
-        LinkListDeque<Integer> list = new LinkListDeque<>();
-        list.addFirst(10);
-        list.addFirst(9);
-        list.addFirst(11);
-        list.printDeque();
-        System.out.println(list.getRecursive(1));
-
-        list.removeFirst();
-        System.out.println(list.get(1));
-
-
     }
 }
