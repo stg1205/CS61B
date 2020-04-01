@@ -1,9 +1,6 @@
 /** ArrayDeque
  * It should have a minusOne function...
  * It would be better using 2-bit...but I don't know how.
- * The length of resized array is 2 times of the original,
- * so the usage check(r < 0.25) is only necessary in remove method,
- * but it seems not efficient in time to add so much "if"...
  */
 
 public class ArrayDeque<T> {
@@ -24,16 +21,24 @@ public class ArrayDeque<T> {
     /* Copy all the items to index 4 in new array t, then reset nextFirst and nextLast. */
     private void resize(int capacity) {
         T[] t = (T[]) new Object[capacity];
-        System.arraycopy(items, 0, t, 4, size);
-        nextFirst = 3;
-        nextLast = 4 + size;
+
+        if (nextFirst == nextLast - 1 || nextFirst > nextLast) {
+            System.arraycopy(items, 0, t, 0, nextLast);
+            int backLen = items.length - 1 - nextFirst;
+            System.arraycopy(items, nextFirst + 1, t, capacity - backLen, backLen);
+            nextFirst = capacity - backLen - 1;
+        } else {
+            System.arraycopy(items, nextFirst + 1, t, 0, size);
+            nextFirst = capacity - 1;
+            nextLast = size;
+        }
         items = t;
     }
 
     /** Add the first item of ArrayDeque */
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(size * 2);
+            resize(items.length * 2);
         }
         items[nextFirst] = item;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
@@ -43,7 +48,7 @@ public class ArrayDeque<T> {
     /** Add the last item of ArrayDeque */
     public void addLast(T item) {
         if (size == items.length) {
-            resize(size * 2);
+            resize(items.length * 2);
         }
         items[nextLast] = item;
         nextLast = (nextLast + 1) % items.length;
@@ -60,6 +65,12 @@ public class ArrayDeque<T> {
         return size;
     }
 
+    private void checkUsage() {
+        if ((double) size / items.length < 0.25) {
+            resize(items.length / 2);
+        }
+    }
+
     /** Remove and return the item at the front of the deque.
      * If no, return null */
     public T removeFirst() {
@@ -71,6 +82,9 @@ public class ArrayDeque<T> {
         items[first] = null;
         nextFirst = first;
         size -= 1;
+        if (size != 0 ) {
+            checkUsage();
+        }
         return it;
     }
 
@@ -85,6 +99,9 @@ public class ArrayDeque<T> {
         items[last] = null;
         nextLast = last;
         size -= 1;
+        if (size != 0 ) {
+            checkUsage();
+        }
         return it;
     }
 
