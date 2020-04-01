@@ -1,4 +1,4 @@
-public class LinkListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
 
     private class LLD {
         public T item;
@@ -16,7 +16,7 @@ public class LinkListDeque<T> {
     private int size;
 
     /** Create an empty linked list deque */
-    public LinkListDeque() {
+    public LinkedListDeque() {
         //sentinel = new LLD(null, sentinel, sentinel);   not worked
         sentinel = new LLD(null, null, null);
         sentinel.prev = sentinel;
@@ -25,6 +25,7 @@ public class LinkListDeque<T> {
     }
 
     /** Adds an item of type T to the front of the deque */
+    @Override
     public void addFirst(T item) {
         sentinel.next = new LLD(item, sentinel, sentinel.next);
         if (size == 0) {
@@ -37,6 +38,7 @@ public class LinkListDeque<T> {
     }
 
     /** Adds an item of type T to the back of the deque */
+    @Override
     public void addLast(T item) {
         sentinel.prev.next = new LLD(item, sentinel.prev, sentinel);
         sentinel.prev = sentinel.prev.next;
@@ -44,16 +46,15 @@ public class LinkListDeque<T> {
     }
 
     /**Returns true if deque is empty, false else */
+    @Override
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     /**Removes and returns the item at the front of the deque.
      * if no, returns null
      */
+    @Override
     public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
@@ -68,6 +69,7 @@ public class LinkListDeque<T> {
     /**Removes and returns the item at the back of the deque.
      * if no, returns null
      */
+    @Override
     public T removeLast() {
         if (sentinel.prev == sentinel) {
             return null;
@@ -80,6 +82,7 @@ public class LinkListDeque<T> {
     }
 
     /**Gets the item at the given index */
+    @Override
     public T get(int index) {
         LLD l = sentinel;
         for (int i = 0; i <= index; i += 1) {
@@ -101,6 +104,7 @@ public class LinkListDeque<T> {
     }
 
     /** Print deque from first to last, separated by a space */
+    @Override
     public void printDeque() {
         if (size == 0) {
             System.out.println("Empty list!");
@@ -113,6 +117,7 @@ public class LinkListDeque<T> {
         System.out.println();
     }
 
+    @Override
     public int size() {
         return size;
     }

@@ -1,9 +1,9 @@
-public class LinkListDeque<T> implements Deque<T> {
+public class LinkedListDeque<T> {
 
     private class LLD {
-        public T item;
-        public LLD prev;
-        public LLD next;
+        private T item;
+        private LLD prev;
+        private LLD next;
 
         public LLD(T it, LLD p, LLD n) {
             item = it;
@@ -16,7 +16,7 @@ public class LinkListDeque<T> implements Deque<T> {
     private int size;
 
     /** Create an empty linked list deque */
-    public LinkListDeque() {
+    public LinkedListDeque() {
         //sentinel = new LLD(null, sentinel, sentinel);   not worked
         sentinel = new LLD(null, null, null);
         sentinel.prev = sentinel;
@@ -25,7 +25,6 @@ public class LinkListDeque<T> implements Deque<T> {
     }
 
     /** Adds an item of type T to the front of the deque */
-    @Override
     public void addFirst(T item) {
         sentinel.next = new LLD(item, sentinel, sentinel.next);
         if (size == 0) {
@@ -38,7 +37,6 @@ public class LinkListDeque<T> implements Deque<T> {
     }
 
     /** Adds an item of type T to the back of the deque */
-    @Override
     public void addLast(T item) {
         sentinel.prev.next = new LLD(item, sentinel.prev, sentinel);
         sentinel.prev = sentinel.prev.next;
@@ -46,7 +44,6 @@ public class LinkListDeque<T> implements Deque<T> {
     }
 
     /**Returns true if deque is empty, false else */
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -54,7 +51,6 @@ public class LinkListDeque<T> implements Deque<T> {
     /**Removes and returns the item at the front of the deque.
      * if no, returns null
      */
-    @Override
     public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
@@ -69,7 +65,6 @@ public class LinkListDeque<T> implements Deque<T> {
     /**Removes and returns the item at the back of the deque.
      * if no, returns null
      */
-    @Override
     public T removeLast() {
         if (sentinel.prev == sentinel) {
             return null;
@@ -82,7 +77,6 @@ public class LinkListDeque<T> implements Deque<T> {
     }
 
     /**Gets the item at the given index */
-    @Override
     public T get(int index) {
         LLD l = sentinel;
         for (int i = 0; i <= index; i += 1) {
@@ -104,7 +98,6 @@ public class LinkListDeque<T> implements Deque<T> {
     }
 
     /** Print deque from first to last, separated by a space */
-    @Override
     public void printDeque() {
         if (size == 0) {
             System.out.println("Empty list!");
@@ -117,7 +110,6 @@ public class LinkListDeque<T> implements Deque<T> {
         System.out.println();
     }
 
-    @Override
     public int size() {
         return size;
     }

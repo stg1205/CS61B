@@ -4,7 +4,6 @@
  * The length of resized array is 2 times of the original,
  * so the usage check(r < 0.25) is only necessary in remove method,
  * but it seems not efficient in time to add so much "if"...
- * @ZEWEN
  */
 
 public class ArrayDeque<T> {
@@ -53,10 +52,7 @@ public class ArrayDeque<T> {
 
     /** Returns true if deque is empty. */
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     /** Return size */
@@ -99,7 +95,7 @@ public class ArrayDeque<T> {
 
     /** Print the items in the deque from first to last,
      * separated by a space */
-    public void print() {
+    public void printDeque() {
         int cur;
         if (size == 0) {
             System.out.println("Empty array!");
