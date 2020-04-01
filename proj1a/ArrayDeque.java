@@ -1,9 +1,7 @@
 /** ArrayDeque
- * It should have a minusOne function...
- * It would be better using 2-bit...but I don't know how.
  */
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T>  {
     private T[] items;
     private int size;
     private int nextFirst;
@@ -21,31 +19,28 @@ public class ArrayDeque<T> {
         return (index - 1 + items.length) % items.length;
     }
 
-    private int addOne(int index) {
+    private int plusOne(int index) {
         return (index + 1) % items.length;
     }
     /** Resize method */
-    /* Copy all the items to index 4 in new array t, then reset nextFirst and nextLast. */
+    /* Copy all the items to index 0 in new array t, then reset nextFirst and nextLast. */
     private void resize(int capacity) {
         T[] t = (T[]) new Object[capacity];
 
-        if (nextFirst == minusOne(nextLast) || nextFirst > nextLast) {
-            System.arraycopy(items, 0, t, 0, nextLast);
-            int backLen = items.length - addOne(nextFirst);
-            System.arraycopy(items, addOne(nextFirst), t, capacity - backLen, backLen);
-            nextFirst = capacity - backLen - 1;
-        } else {
-            System.arraycopy(items, addOne(nextFirst), t, 0, size);
-            nextFirst = capacity - 1;
-            nextLast = size;
+        int oldIndex = plusOne(nextFirst);
+        for (int newIndex = 0; newIndex < size; newIndex++) {
+            t[newIndex] = items[oldIndex];
+            oldIndex = plusOne(oldIndex);
         }
+        nextFirst = capacity - 1;
+        nextLast = size;
         items = t;
     }
 
     /** Add the first item of ArrayDeque */
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(items.length * 2);
+            resize(items.length << 1);
         }
         items[nextFirst] = item;
         nextFirst = minusOne(nextFirst);
@@ -55,10 +50,10 @@ public class ArrayDeque<T> {
     /** Add the last item of ArrayDeque */
     public void addLast(T item) {
         if (size == items.length) {
-            resize(items.length * 2);
+            resize(items.length << 1);
         }
         items[nextLast] = item;
-        nextLast = addOne(nextLast);
+        nextLast = plusOne(nextLast);
         size += 1;
     }
 
@@ -74,7 +69,7 @@ public class ArrayDeque<T> {
 
     private void checkUsage() {
         if ((double) size / items.length < 0.25) {
-            resize(items.length / 2);
+            resize(items.length >> 1);
         }
     }
 
@@ -84,7 +79,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        int first = addOne(nextFirst);
+        int first = plusOne(nextFirst);
         T it = items[first];
         items[first] = null;
         nextFirst = first;
@@ -129,24 +124,5 @@ public class ArrayDeque<T> {
             System.out.print(items[cur] + " ");
         }
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> a = new ArrayDeque<>();
-        a.addFirst(0);
-        a.removeLast();
-        a.addFirst(2);
-        a.removeFirst();
-        a.addLast(4);
-        a.get(0);
-        a.addLast(6);
-        a.removeLast();
-        a.addLast(8);
-        a.addLast(9);
-        a.get(0);
-        a.addLast(11);
-        a.addLast(12);
-        a.addLast(13);
-        a.get(3);
     }
 }
