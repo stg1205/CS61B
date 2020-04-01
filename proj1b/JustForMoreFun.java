@@ -36,7 +36,9 @@ public class JustForMoreFun {
                 mostN = i;
             }
         }
-        System.out.println("OffByN " + mostN + " has most palindromes in English——" + largestNum);
-        System.out.println("OffByN " + longestN + " has the longest offByN palindrome——" + longestWord);
+        System.out.println("OffByN " + mostN +
+                           " has most palindromes in English——" + largestNum);
+        System.out.println("OffByN " + longestN +
+                           " has the longest offByN palindrome——" + longestWord);
     }
 }

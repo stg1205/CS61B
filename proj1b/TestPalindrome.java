@@ -9,12 +9,12 @@ public class TestPalindrome {
 
     @Test
     public void testWordToDeque() {
-        Deque<Character> d = palindrome.wordToDeque("persiflage");
+        Deque<Character> d = palindrome.wordToDeque("hello[ world]");
         StringBuilder actual = new StringBuilder();
-        for (int i = 0; i < "persiflage".length(); i++) {
+        for (int i = 0; i < "hello[ world]".length(); i++) {
             actual.append(d.removeFirst());
         }
-        assertEquals("persiflage", actual.toString());
+        assertEquals("hello[ world]", actual.toString());
     } //Uncomment this class once you've created your Palindrome class.
 
     @Test

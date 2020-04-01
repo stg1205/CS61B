@@ -1,14 +1,10 @@
 public class Palindrome {
 
-    private static String cleanString(String s) {
-        return s.replaceAll("[^a-zA-Z]", "");
-    }
-
     public Deque<Character> wordToDeque(String word) {
         Deque<Character> wordList = new LinkedListDeque<>();
-        String cleanWord = cleanString(word);
-        for (int i = 0; i < cleanWord.length(); i += 1) {
-            wordList.addLast(cleanWord.charAt(i));
+
+        for (int i = 0; i < word.length(); i += 1) {
+            wordList.addLast(word.charAt(i));
         }
         return wordList;
     }

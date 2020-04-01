@@ -1,9 +1,9 @@
 public class LinkedListDeque<T> implements Deque<T> {
 
     private class LLD {
-        public T item;
-        public LLD prev;
-        public LLD next;
+        private T item;
+        private LLD prev;
+        private LLD next;
 
         public LLD(T it, LLD p, LLD n) {
             item = it;
