@@ -1,6 +1,5 @@
 package byog.Core;
 
-import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
@@ -93,26 +92,5 @@ public class WorldCreator extends RectangleHelper {
                 world[j][i] = Tileset.NOTHING;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        int WIDTH = 81, HEIGHT = 31;
-        int seed = 234;
-        Random RANDOM = new Random(seed);
-        TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);
-
-        // initialize tiles
-        TETile[][] world = new TETile[WIDTH][HEIGHT];
-
-        for (int x = 0; x < WIDTH; x += 1) {
-            for (int y = 0; y < HEIGHT; y += 1) {
-                world[x][y] = Tileset.NOTHING;
-            }
-        }
-
-        worldGenerator(RANDOM, world);
-
-        ter.renderFrame(world);
     }
 }

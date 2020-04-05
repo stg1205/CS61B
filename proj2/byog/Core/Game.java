@@ -45,11 +45,11 @@ public class Game {
      * @return the 2D TETile[][] representing the state of the world
      */
     public TETile[][] playWithInputString(String input) {
-        // TODO: Fill out this method to run the game using the input passed in,
+        // Fill out this method to run the game using the input passed in,
         // and return a 2D tile representation of the world that would have been
         // drawn if the same inputs had been given to playWithKeyboard().
 
-        int seed = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+        long seed = Long.parseLong(input.replaceAll("[^0-9]", ""));
         Random RANDOM = new Random(seed);
         TETile[][] world = worldInitialize();
         return WorldCreator.worldGenerator(RANDOM, world);
