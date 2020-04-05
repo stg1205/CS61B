@@ -3,6 +3,7 @@ package byog.Core;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
+import edu.princeton.cs.introcs.StdDraw;
 
 import java.util.Random;
 
@@ -13,8 +14,8 @@ public class Game {
     public static final int HEIGHT = 31;
 
     private TETile[][] worldInitialize() {
-        TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);
+        /*TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);*/
 
         // initialize tiles
         TETile[][] world = new TETile[WIDTH][HEIGHT];
