@@ -21,7 +21,7 @@ public class RectangleHelper {
         return pArray;
     }
 
-    /** Return four around positions.
+    /** Return four orthogonally-adjacent positions.
      *      3
      *    0   2
      *      1

@@ -3,7 +3,6 @@ package byog.Core;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
-import edu.princeton.cs.introcs.StdDraw;
 
 import java.util.Random;
 
@@ -13,10 +12,7 @@ public class Game {
     public static final int WIDTH = 81;
     public static final int HEIGHT = 31;
 
-    private TETile[][] worldInitialize() {
-        /*TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);*/
-
+    private TETile[][] worldInitialize(String s) {
         // initialize tiles
         TETile[][] world = new TETile[WIDTH][HEIGHT];
 
@@ -52,7 +48,7 @@ public class Game {
 
         long seed = Long.parseLong(input.replaceAll("[^0-9]", ""));
         Random RANDOM = new Random(seed);
-        TETile[][] world = worldInitialize();
+        TETile[][] world = worldInitialize("Strange autograder");
         return WorldCreator.worldGenerator(RANDOM, world);
     }
 }
