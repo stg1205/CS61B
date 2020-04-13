@@ -5,9 +5,9 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
-    private int[][] grid;
-    private int N;
-    private int[] dx = {-1, 1, 0, 0}, dy = {0, 0, -1, 1};
+    private final int[][] grid;
+    private final int N;
+    private final int[] dx = {-1, 1, 0, 0}, dy = {0, 0, -1, 1};
     private WeightedQuickUnionUF unionGrid;
     private WeightedQuickUnionUF unionGrid2;
     //private QuickUnionUF unionGrid;
@@ -40,7 +40,7 @@ public class Percolation {
             throw new IllegalArgumentException();
         grid = new int[N][N];
         unionGrid = new WeightedQuickUnionUF(N * N + 2);
-        unionGrid = new WeightedQuickUnionUF(N * N + 1);
+        unionGrid2 = new WeightedQuickUnionUF(N * N + 1);
         //unionGrid = new QuickUnionUF(N * N + 2);
         this.N = N;
         numberOfOpenSites = 0;

@@ -12,7 +12,6 @@ public class PercolationStats {
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0)
             throw new IllegalArgumentException();
-        test = pf.make(N);
         this.T = T;
         x = new double[T];
 
