@@ -9,6 +9,7 @@ public class Percolation {
     private int N;
     private int[] dx = {-1, 1, 0, 0}, dy = {0, 0, -1, 1};
     private WeightedQuickUnionUF unionGrid;
+    private WeightedQuickUnionUF unionGrid2;
     //private QuickUnionUF unionGrid;
     private int numberOfOpenSites;
 
@@ -17,7 +18,7 @@ public class Percolation {
     }
 
     /* union a point with points that are orthogonally adjacent to it */
-    private void orthogonallyUnion(int row, int col) {
+    private void orthogonallyUnion(WeightedQuickUnionUF unionGrid, int row, int col) {
         for (int i = 0; i < 4; i++) {
             if ((row + dx[i] >= 0 && row + dx[i] < N)
              && (col + dy[i] >= 0 && col + dy[i] < N)) {
@@ -39,6 +40,7 @@ public class Percolation {
             throw new IllegalArgumentException();
         grid = new int[N][N];
         unionGrid = new WeightedQuickUnionUF(N * N + 2);
+        unionGrid = new WeightedQuickUnionUF(N * N + 1);
         //unionGrid = new QuickUnionUF(N * N + 2);
         this.N = N;
         numberOfOpenSites = 0;
@@ -49,11 +51,14 @@ public class Percolation {
         validate(row, col);
         if (grid[row][col] != 1) {
             grid[row][col] = 1;
-            if (row == 0)
+            if (row == 0) {
                 unionGrid.union(N * N, xyTo1D(row, col));
+                unionGrid2.union(N * N, xyTo1D(row, col));
+            }
             else if (row == N - 1)
                 unionGrid.union(N * N + 1, xyTo1D(row, col));
-            orthogonallyUnion(row, col);
+            orthogonallyUnion(unionGrid, row, col);
+            orthogonallyUnion(unionGrid2, row, col);
             numberOfOpenSites++;
         }
     }
@@ -67,7 +72,7 @@ public class Percolation {
     /* is the site (row, col) full? */
     public boolean isFull(int row, int col) {
         validate(row, col);
-        return unionGrid.connected(xyTo1D(row, col), N * N);
+        return unionGrid2.connected(xyTo1D(row, col), N * N);
     }
 
     /* number of open sites */
@@ -78,5 +83,9 @@ public class Percolation {
     /* does the system percolate? */
     public boolean percolates() {
         return unionGrid.connected(N * N, N * N + 1);
+    }
+
+    public static void main(String[] args) {
+
     }
 }
