@@ -68,11 +68,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        if (root == null) {
-            root = new BSTNode(key, value);
-        }
-        else
-            put(key, value, root);
+        root = put(key, value, root);
         size += 1;
     }
 

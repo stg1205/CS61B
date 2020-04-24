@@ -11,6 +11,7 @@ public class TestJankyOomage {
     private static class JankyOomage implements Oomage {
         private int val;
 
+        public void printParams() {}
         @Override
         public void draw(double x, double y, double scalingFactor) {
             return;

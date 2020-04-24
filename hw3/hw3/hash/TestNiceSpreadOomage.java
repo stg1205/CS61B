@@ -12,6 +12,11 @@ public class TestNiceSpreadOomage {
         private int val;
 
         @Override
+        public void printParams() {
+
+        }
+
+        @Override
         public void draw(double x, double y, double scalingFactor) {
             return;
         }

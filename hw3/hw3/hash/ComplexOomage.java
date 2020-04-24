@@ -13,9 +13,12 @@ public class ComplexOomage implements Oomage {
     public int hashCode() {
         int total = 0;
         for (int x : params) {
-            total = total * 256;
+            //total = total * 256;
+            total = total * 31;
             total = total + x;
+            System.out.println(Integer.toBinaryString(total));
         }
+        System.out.println();
         return total;
     }
 
@@ -71,6 +74,18 @@ public class ComplexOomage implements Oomage {
         }
     }
 
+    public static ComplexOomage randomComplexOomageEndsSame4() {
+        int N = StdRandom.uniform(4, 10);
+        ArrayList<Integer> params = new ArrayList<>(N);
+        for (int i = 0; i < N - 4; i += 1) {
+            params.add(StdRandom.uniform(0, 255));
+        }
+        for (int i = N - 4; i < N; i++) {
+            params.add(9);
+        }
+        return new ComplexOomage(params);
+    }
+
     public static ComplexOomage randomComplexOomage() {
         int N = StdRandom.uniform(1, 10);
         ArrayList<Integer> params = new ArrayList<>(N);
@@ -80,11 +95,17 @@ public class ComplexOomage implements Oomage {
         return new ComplexOomage(params);
     }
 
+    public void printParams() {
+        for (int a: params)
+            System.out.print(a + " ");
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        System.out.println("Drawing 4 random complex Oomages.");
+        /*System.out.println("Drawing 4 random complex Oomages.");
         randomComplexOomage().draw(0.25, 0.25, 1.5);
         randomComplexOomage().draw(0.75, 0.75, 1.5);
         randomComplexOomage().draw(0.25, 0.75, 1.5);
-        randomComplexOomage().draw(0.75, 0.25, 1.5);
+        randomComplexOomage().draw(0.75, 0.25, 1.5);*/
     }
 } 
